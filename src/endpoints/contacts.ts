@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import { ContactsDao, UsersDao } from '../dao/_index'
+import { ContactsDao, UsersDao } from '../dao'
 import { Pagination } from '../utils/pagination'
 
 export async function findByUser(req: any, res: Response) {

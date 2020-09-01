@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { UsersDao } from '../dao/_index'
+import { UsersDao } from '../dao'
 import jwt from 'jsonwebtoken'
 import { encrypt, decrypt } from '../utils/encryption'
 
@@ -20,7 +20,6 @@ export async function authenticate(req: Request, res: Response) {
     return res.status(403).json({ error: 'You have provided a wrong email or password', errorCode: 'INVALID_LOGIN', status: 403 })
   }
   catch (error) {
-    console.log('error', error)
     return res.status(500).json({ error: error.response || error })
   }
 }
@@ -28,7 +27,6 @@ export async function authenticate(req: Request, res: Response) {
 export async function register(req: Request, res: Response) {
   try {
     const newUser = req.body
-    console.log('NEW USER', newUser)
     newUser.password = encrypt(newUser.password)
 
     const userDb = await UsersDao.create(newUser)
@@ -53,7 +51,7 @@ export async function resetPassword(req: Request, res: Response) {
 
       return res.status(200).json({
         status: 200,
-        message: `User password has been updated successfully`,
+        message: 'User password has been updated successfully',
         code: 'PASSWORD_RESET_SUCCESS'
       })
     }

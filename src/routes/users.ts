@@ -1,5 +1,5 @@
 import * as express from 'express'
-import { UserController } from '../endpoints/_index'
+import { UserController } from '../endpoints'
 import { protectRoute, validateHttpMethod } from '../middlewares'
 import { POST, PUT } from '../utils/httpMethods'
 
