@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-const { JWT_SECRET } = require('../../config/api.json')
+const { JWT_SECRET } = require('../../config/security.json')
 
 export default function authenticateToken(req: any, res: any, next: any) {
     const header = req.headers['authorization']

@@ -1,16 +1,20 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import { ContactsDao, UsersDao } from '../dao/_index'
+import { Pagination } from '../utils/pagination'
 
 export async function findByUser(req: any, res: Response) {
   try {
     const { id: userId } = req.decodedUser
+    const { from, to, limit } = req.query
+
     const user = await UsersDao.findById(userId)
 
     if (!user) {
       return res.status(404).json({ error: 'Provided user doesn\'t exist', errorCode: 'USER_NOT_EXIST', status: 404 })
     }
 
-    const contacts = await ContactsDao.findAll(userId)
+    const pagination = new Pagination(parseInt(from), parseInt(to), parseInt(limit))
+    const contacts = await ContactsDao.findAll(userId, pagination)
 
     return res.status(200).json(contacts)
   }
@@ -19,10 +23,12 @@ export async function findByUser(req: any, res: Response) {
   }
 }
 
-export async function findById(req: Request, res: Response) {
+export async function findById(req: any, res: Response) {
   try {
     const { contactId } = req.params
-    const contact = await ContactsDao.findById(contactId)
+    const { id: userId } = req.decodedUser
+
+    const contact = await ContactsDao.findById(contactId, userId)
 
     if (!contact) {
       return res.status(404).json({ error: 'Provided contact doesn\'t exist', errorCode: 'CONTACT_NOT_EXIST', status: 404 })
@@ -47,10 +53,16 @@ export async function create(req: any, res: Response) {
   }
 }
 
-export async function remove(req: Request, res: Response) {
+export async function remove(req: any, res: Response) {
   try {
     const { contactId } = req.params
-    await ContactsDao.remove(contactId)
+    const { id: userId } = req.decodedUser
+
+    const removedContact = await ContactsDao.remove(contactId, userId)
+
+    if (!removedContact) {
+      return res.status(404).json({ error: 'Provided contact doesn\'t exist', errorCode: 'CONTACT_NOT_EXIST', status: 404 })
+    }
 
     return res.status(204).json()
   } catch (error) {
