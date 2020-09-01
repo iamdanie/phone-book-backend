@@ -1,0 +1,35 @@
+{
+  "development": {
+    "username": "root",
+    "password": "123456..",
+    "database": "phonebookdev",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": true,
+    "force": true,
+    "timezone": "+00:00"
+  },
+  "test": {
+    "username": "root",
+    "password": "123456..",
+    "database": "phonebooktest",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": true,
+    "force": true,
+    "timezone": "+00:00"
+  },
+  "production": {
+    "username": "root",
+    "password": ";?QL@a_`2.v!R;SD",
+    "database": "phonebook",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": true,
+    "force": true,
+    "timezone": "+00:00"
+  }
+}
