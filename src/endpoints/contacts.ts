@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
 import { ContactsDao, UsersDao } from '../dao/_index'
 
-export async function findByUser(req: Request, res: Response) {
+export async function findByUser(req: any, res: Response) {
   try {
-    const { userId } = req.params
+    const { id: userId } = req.decodedUser
     const user = await UsersDao.findById(userId)
 
     if (!user) {
@@ -35,11 +35,10 @@ export async function findById(req: Request, res: Response) {
   }
 }
 
-export async function create(req: Request, res: Response) {
+export async function create(req: any, res: Response) {
   try {
-    // ToDo: handle get userId from token
-
-    const newContact = { ...req.body, userId: 1 }
+    const { id: userId } = req.decodedUser
+    const newContact = { ...req.body, userId }
     const createdContact = await ContactsDao.create(newContact)
 
     return res.status(202).json(createdContact)

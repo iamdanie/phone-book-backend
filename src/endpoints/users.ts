@@ -1,12 +1,19 @@
 import { Request, Response } from 'express'
 import { UsersDao } from '../dao/_index'
+import jwt from 'jsonwebtoken'
+
+const { JWT_SECRET, JWT_EXPIRATION, JWT_ALGORITHM } = require('../../config/api.json')
 
 export async function authenticate(req: Request, res: Response) {
   try {
     const { email, password } = req.body
-    if (userCredentialsAreValid(email, password)) {
-      // ToDo: return JWT authentication token
-      return res.status(200).json({ token: 'FOO' })
+    const user = await userCredentialsAreValid(email, password)
+
+    if (user) {
+      const token = generateToken(user)
+      delete user.password
+
+      return res.status(200).json({ user, token })
     }
 
     return res.status(403).json({ error: 'You have provided a wrong username/password', errorCode: 'INVALID_LOGIN', status: 403 })
@@ -22,7 +29,6 @@ export async function register(req: Request, res: Response) {
     const user = userDb.toJSON()
     delete user.password
 
-    // ToDo: return JWT authentication token
     return res.status(202).json(user)
   }
   catch (error) {
@@ -34,8 +40,9 @@ export async function resetPassword(req: Request, res: Response) {
   try {
     const { userId } = req.params
     const { email, currentPassword, newPassword } = req.body
+    const user = await userCredentialsAreValid(email, currentPassword, userId)
 
-    if (await userCredentialsAreValid(email, currentPassword, userId)) {
+    if (user) {
       await UsersDao.updatePassword(userId, newPassword)
 
       return res.status(200).json({
@@ -56,5 +63,10 @@ async function userCredentialsAreValid(email: string, password: string, userId?:
   const userDb = userId ? await UsersDao.findById(userId) : await UsersDao.findByEmail(email)
   const user = await userDb.toJSON()
 
-  return user && password === user.password
+  return (user && password === user.password) ? user : null
 }
+
+const generateToken = (payload: any) => jwt.sign(payload, JWT_SECRET, {
+  expiresIn: JWT_EXPIRATION,
+  algorithm: JWT_ALGORITHM
+})

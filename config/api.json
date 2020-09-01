@@ -1,4 +1,7 @@
 {
     "PORT": 3001,
-    "VERSION": "/api/v1"
+    "VERSION": "/api/v1",
+    "JWT_SECRET": "@ichab9a2reco5-tlH$w",
+    "JTW_EXPIRATION": "1440",
+    "JWT_ALGORITHM": "HS512"
 }
