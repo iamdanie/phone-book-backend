@@ -1,1 +1,0 @@
-{"version":3,"sources":["endpoints/_index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA,8DAA+C;AAGtC,8CAAiB;AAF1B,wDAAyC;AAEb,wCAAc","file":"_index.js","sourcesContent":["import * as ContactController from './contacts'\nimport * as UserController from './users'\n\nexport { ContactController, UserController }\n"],"sourceRoot":"../../src"}
