@@ -22,7 +22,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id: 1002,
+      id: 1003,
       userId: 1002,
       firstName: 'Robert',
       lastName: 'Halford',
@@ -31,7 +31,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id: 1003,
+      id: 1004,
       userId: 1001,
       firstName: 'Ernesto',
       lastName: 'Rodriguez',
@@ -40,7 +40,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id: 1004,
+      id: 1005,
       userId: 1001,
       firstName: 'Juan',
       lastName: 'Velazquez',

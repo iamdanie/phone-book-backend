@@ -6,7 +6,7 @@ module.exports = {
       id: 1001,
       name: 'Daniela Bravo',
       email: 'daniela.bravo@foo.com',
-      password: 'Password123$',
+      password: 'edb37c12df0a6409161f19939e284a8c:2ead2b57a8a365f3b2ec68570372b284',
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -14,7 +14,7 @@ module.exports = {
       id: 1002,
       name: 'Clay Morrow',
       email: 'clay.samcro@bar.com',
-      password: 'Password123$',
+      password: 'edb37c12df0a6409161f19939e284a8c:2ead2b57a8a365f3b2ec68570372b284',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {})

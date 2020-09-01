@@ -1,5 +1,5 @@
 import * as express from 'express'
-import { ContactController } from '../endpoints/_index'
+import { ContactController } from '../endpoints'
 import { protectRoute, validateHttpMethod } from '../middlewares'
 import { GET, POST, DELETE } from '../utils/httpMethods'
 

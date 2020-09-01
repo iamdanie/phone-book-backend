@@ -4,7 +4,6 @@ const { ENCRYPTION_KEY, ENCRYPTION_ALGORITHM } = require('../../config/security.
 const vector = crypto.randomBytes(16)
 
 export const encrypt = (text: string) => {
-    console.log(ENCRYPTION_KEY, ENCRYPTION_ALGORITHM, vector)
     const cipher = crypto.createCipheriv(ENCRYPTION_ALGORITHM, Buffer.from(ENCRYPTION_KEY), vector)
     const encryptedText = Buffer.concat([cipher.update(text), cipher.final()])
 

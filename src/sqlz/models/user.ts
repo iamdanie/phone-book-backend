@@ -1,5 +1,5 @@
 import { DataTypes, Model, HasManyGetAssociationsMixin, Association } from 'sequelize'
-import sequelize from './_index'
+import sequelize from './db'
 import Contact from './contact'
 
 interface UserAttributes {
