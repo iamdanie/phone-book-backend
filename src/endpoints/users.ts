@@ -65,8 +65,12 @@ export async function resetPassword(req: Request, res: Response) {
 
 async function userCredentialsAreValid(email: string, password: string, userId?: string) {
   const userDb = userId ? await UsersDao.findById(userId) : await UsersDao.findByEmail(email)
-  const user = await userDb.toJSON()
 
+  if (!userDb) {
+    return null
+  }
+
+  const user = await userDb.toJSON()
   return (user && password === decrypt(user.password)) ? user : null
 }
 
