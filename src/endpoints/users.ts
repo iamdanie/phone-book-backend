@@ -20,7 +20,7 @@ export async function authenticate(req: Request, res: Response) {
     return res.status(403).json({ error: 'You have provided a wrong email or password', errorCode: 'INVALID_LOGIN', status: 403 })
   }
   catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
 
@@ -36,7 +36,7 @@ export async function register(req: Request, res: Response) {
     return res.status(202).json(user)
   }
   catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
 
@@ -59,7 +59,7 @@ export async function resetPassword(req: Request, res: Response) {
     return res.status(403).json({ error: 'You have provided a wrong email or password', errorCode: 'WRONG_RESET_PASSWORD', status: 403 })
   }
   catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
 

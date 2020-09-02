@@ -19,7 +19,7 @@ export async function findByUser(req: any, res: Response) {
     return res.status(200).json(contacts)
   }
   catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
 
@@ -37,7 +37,7 @@ export async function findById(req: any, res: Response) {
     return res.status(200).json(contact)
   }
   catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
 
@@ -49,7 +49,7 @@ export async function create(req: any, res: Response) {
 
     return res.status(202).json(createdContact)
   } catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
 
@@ -66,6 +66,6 @@ export async function remove(req: any, res: Response) {
 
     return res.status(204).json()
   } catch (error) {
-    return res.status(500).json({ error: error.response || error })
+    return res.status(500).json({ error: error.response || error.errors[0].message || error })
   }
 }
