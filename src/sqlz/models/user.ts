@@ -40,6 +40,7 @@ User.init(
       type: DataTypes.STRING(255)
     },
     email: {
+      unique: true,
       allowNull: false,
       type: DataTypes.STRING(255)
     },
